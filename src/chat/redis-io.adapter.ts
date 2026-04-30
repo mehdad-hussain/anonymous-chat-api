@@ -26,7 +26,10 @@ export class RedisIoAdapter extends IoAdapter {
       throw new Error('REDIS_URL is not defined');
     }
 
-    const pubClient = new Redis(redisUrl);
+    const isTls = redisUrl.startsWith('rediss://');
+    const tlsOptions = isTls ? { tls: {} } : {};
+
+    const pubClient = new Redis(redisUrl, tlsOptions);
     const subClient = pubClient.duplicate();
 
     pubClient.on('error', (err) => {

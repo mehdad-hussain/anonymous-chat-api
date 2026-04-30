@@ -15,9 +15,11 @@ export const REDIS_CLIENT = Symbol('REDIS_CLIENT');
         if (!redisUrl) {
           throw new Error('REDIS_URL is not defined');
         }
+        const isTls = redisUrl.startsWith('rediss://');
         return new Redis(redisUrl, {
           maxRetriesPerRequest: 3,
           retryStrategy: (times: number) => Math.min(times * 100, 3000),
+          ...(isTls && { tls: {} }),
         });
       },
     },
