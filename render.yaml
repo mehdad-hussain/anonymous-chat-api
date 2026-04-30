@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     buildCommand: pnpm install --frozen-lockfile; pnpm build; pnpm migrate
-    startCommand: pnpm start:prod
+    startCommand: cd /opt/render/project && node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
