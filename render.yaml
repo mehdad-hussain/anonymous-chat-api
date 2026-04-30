@@ -3,7 +3,7 @@ services:
     name: anonymous-chat-api
     runtime: node
     plan: free
-    buildCommand: pnpm install --frozen-lockfile && pnpm build && pnpm migrate
+    buildCommand: pnpm install --frozen-lockfile; pnpm build; pnpm migrate
     startCommand: pnpm start:prod
     envVars:
       - key: NODE_ENV
