@@ -33,6 +33,15 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'warn',
       '@typescript-eslint/no-unsafe-member-access': 'warn',
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            "MemberExpression[object.name='process'][property.name='env']",
+          message:
+            'Do not access process.env directly. Use ConfigService instead (or env.validation.ts at bootstrap).',
+        },
+      ],
     },
   },
 );

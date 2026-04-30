@@ -22,10 +22,10 @@ async function bootstrap() {
 
   // ── Get Configuration ──
   const configService = app.get(ConfigService);
-  const port = process.env.PORT ?? 3000;
+  const port = configService.get<number>('PORT') ?? 3000;
   const databaseUrl = configService.get<string>('DATABASE_URL');
   const redisUrl = configService.get<string>('REDIS_URL');
-  const nodeEnv = process.env.NODE_ENV || 'development';
+  const nodeEnv = configService.get<string>('NODE_ENV') ?? 'development';
 
   // Log database connection
   if (databaseUrl) {
@@ -41,7 +41,7 @@ async function bootstrap() {
 
   // ── Redis IoAdapter ──
   const redisIoAdapter = new RedisIoAdapter(app, configService);
-  await redisIoAdapter.connectToRedis();
+  redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
   if (redisUrl) {
     const redisHost = redisUrl.split('@')[1]?.split(':')[0] || 'localhost';

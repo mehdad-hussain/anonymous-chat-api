@@ -42,6 +42,20 @@ A real-time group chat service built with **NestJS**, **PostgreSQL**, **Drizzle 
    pnpm run start:dev
    ```
 
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+DATABASE_URL=postgres://chat:chat@localhost:5432/anonymous_chat
+REDIS_URL=redis://localhost:6379
+SESSION_TTL_SECONDS=86400
+PORT=3000
+NODE_ENV=development
+```
+
+> In production, set `NODE_ENV=production` and use the connection strings provided by your hosting platform.
+
 ## Documentation
 
 Interactive API documentation is automatically generated. Once the application is running, navigate to:
