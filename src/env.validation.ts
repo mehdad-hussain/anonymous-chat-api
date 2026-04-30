@@ -9,12 +9,15 @@ enum Environment {
 
 class EnvironmentVariables {
   @IsUrl(
-    { require_tld: false },
+    { require_tld: false, protocols: ['postgresql', 'postgres'] },
     { message: 'DATABASE_URL must be a valid URL' },
   )
   DATABASE_URL!: string;
 
-  @IsUrl({ require_tld: false }, { message: 'REDIS_URL must be a valid URL' })
+  @IsUrl(
+    { require_tld: false, protocols: ['redis', 'rediss'] },
+    { message: 'REDIS_URL must be a valid URL' },
+  )
   REDIS_URL!: string;
 
   @IsInt()
